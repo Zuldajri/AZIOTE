@@ -42,9 +42,6 @@
             "type": "Microsoft.StreamAnalytics/streamingjobs",
             "apiVersion": "2017-04-01-preview",
             "location": "[parameters('location')]",
-            "dependsOn": [ 
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDBName'))]"
-            ],
             "tags": {},
             "properties": {
                 "sku": {
