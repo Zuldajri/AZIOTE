@@ -39,9 +39,6 @@
             "type": "Microsoft.StreamAnalytics/streamingjobs",
             "apiVersion": "2017-04-01-preview",
             "location": "[parameters('location')]",
-            "dependsOn": [
-                 "[resourceId('Microsoft.Sql/Servers/Databases', parameters('sqlServerName'), parameters('sqlDatabaseName'))]"
-            ],  
             "tags": {},
             "properties": {
                 "sku": {
