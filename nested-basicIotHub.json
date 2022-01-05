@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "iotHubName": {
+            "type": "string"
+        },
+        "skuName": {
+            "type": "string"
+        },
+        "skuCapacity": {
+            "type": "string"
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+        "name": "[parameters('iotHubName')]",
+        "type": "Microsoft.Devices/IotHubs",
+        "apiVersion": "2021-03-31",
+        "location": "[parameters('location')]",
+        "tags": {},
+        "properties": {
+            "authorizationPolicies": [
+                {
+                    "keyName": "iothubowner",
+                    "rights": "RegistryWrite, ServiceConnect, DeviceConnect"
+                },
+                {
+                    "keyName": "service",
+                    "rights": "ServiceConnect"
+                },
+                {
+                    "keyName": "device",
+                    "rights": "DeviceConnect"
+                },
+                {
+                    "keyName": "registryRead",
+                    "rights": "RegistryRead"
+                },
+                {
+                    "keyName": "registryReadWrite",
+                    "rights": "RegistryWrite"
+                },
+                {
+                    "keyName": "deviceupdateservice",
+                    "rights": "RegistryRead, ServiceConnect, DeviceConnect"
+                }
+            ],
+            "cloudToDevice": {
+                "maxDeliveryCount": 10,
+                "defaultTtlAsIso8601": "PT1H",
+                "feedback": {
+                    "lockDurationAsIso8601": "PT1M",
+                    "ttlAsIso8601": "PT1H",
+                    "maxDeliveryCount": 10
+                }
+            },
+            "enableFileUploadNotifications": false,
+            "eventHubEndpoints": {
+                "events": {
+                    "retentionTimeInDays": 1,
+                    "partitionCount": 4
+                }
+            },
+
+            "comments": "string",
+            "features": "None",
+            "messagingEndpoints": {
+                "fileNotifications": {
+                    "lockDurationAsIso8601": "PT1M",
+                    "ttlAsIso8601": "PT1H",
+                    "maxDeliveryCount": 10
+                }
+            }
+            
+            
+        },
+        "sku": {
+            "name": "[parameters('skuName')]",
+            "capacity": "[parameters('skuCapacity')]"
+        },
+        "resources": []
+    }
+    ],
+    "outputs": {}
+}
